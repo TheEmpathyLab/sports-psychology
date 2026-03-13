@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>[Your Talk Title] — The Weight Format</title>
+<title>Sports & Psychology</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Special+Elite&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap');
 
@@ -15,6 +15,7 @@
     --paper-dark: #ede6d6;
     --red: #c0392b;
     --pencil: #6b5c4a;
+    --scratch: #8b7355;
   }
 
   body {
@@ -27,6 +28,7 @@
     overflow: hidden;
   }
 
+  /* Noise texture overlay */
   body::before {
     content: '';
     position: fixed;
@@ -58,6 +60,7 @@
 
   .slide.active { display: flex; }
 
+  /* Torn paper edge top */
   .slide::before {
     content: '';
     position: absolute;
@@ -65,49 +68,48 @@
     height: 6px;
     background: repeating-linear-gradient(
       90deg,
-      var(--paper) 0px, var(--paper) 8px,
-      var(--paper-dark) 8px, var(--paper-dark) 9px
+      var(--paper) 0px,
+      var(--paper) 8px,
+      var(--paper-dark) 8px,
+      var(--paper-dark) 9px
     );
   }
 
+  /* Ruled lines background */
   .slide::after {
     content: '';
     position: absolute;
     inset: 0;
     background-image: repeating-linear-gradient(
-      transparent, transparent 31px,
+      transparent,
+      transparent 31px,
       rgba(100,80,60,0.12) 31px,
       rgba(100,80,60,0.12) 32px
     );
     pointer-events: none;
   }
 
+  /* Red margin line */
   .slide .margin-line {
     position: absolute;
-    left: 72px; top: 0; bottom: 0;
+    left: 72px;
+    top: 0;
+    bottom: 0;
     width: 2px;
     background: rgba(192,57,43,0.3);
   }
 
   .slide-number {
     position: absolute;
-    bottom: 28px; right: 48px;
+    bottom: 28px;
+    right: 48px;
     font-family: 'Courier Prime', monospace;
     font-size: 13px;
     color: var(--pencil);
     letter-spacing: 0.1em;
   }
 
-  /* Slide label tag — top left, describes the slide's job */
-  .slide-job {
-    position: absolute;
-    top: 18px; left: 80px;
-    font-family: 'Special Elite', cursive;
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(192,57,43,0.5);
-  }
+  /* ============ TYPOGRAPHY ============ */
 
   h1 {
     font-family: 'Permanent Marker', cursive;
@@ -142,15 +144,23 @@
     max-width: 68ch;
   }
 
-  .placeholder {
-    font-family: 'Courier Prime', monospace;
-    font-size: clamp(0.85rem, 1.6vw, 1rem);
-    color: rgba(192,57,43,0.45);
+  .big-quote {
+    font-family: 'Special Elite', cursive;
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    color: var(--ink);
+    line-height: 1.6;
+    border-left: 4px solid var(--red);
+    padding-left: 1.2em;
+    margin: 1em 0;
     font-style: italic;
-    line-height: 1.7;
-    border-left: 2px dashed rgba(192,57,43,0.3);
-    padding-left: 1em;
-    margin: 0.4em 0;
+  }
+
+  .attribution {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.8rem;
+    color: var(--pencil);
+    margin-top: 0.4em;
+    padding-left: 1.5em;
   }
 
   .underline-red {
@@ -160,11 +170,26 @@
     text-decoration-thickness: 3px;
   }
 
+  .scratch-through {
+    text-decoration: line-through;
+    text-decoration-color: var(--red);
+    opacity: 0.6;
+  }
+
+  /* ============ LAYOUT HELPERS ============ */
+
   .two-col {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2em;
     align-items: start;
+  }
+
+  .three-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5em;
+    margin-top: 0.5em;
   }
 
   .card {
@@ -173,6 +198,7 @@
     padding: 1em 1.2em;
     position: relative;
   }
+
   .card::before {
     content: '';
     position: absolute;
@@ -180,9 +206,40 @@
     background: var(--ink);
     z-index: -1;
   }
-  .card h3 { font-size: 0.85rem; margin-bottom: 0.4em; }
-  .card p  { font-size: 0.82rem; line-height: 1.5; }
 
+  .card h3 {
+    font-size: 0.85rem;
+    margin-bottom: 0.4em;
+  }
+
+  .card p {
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+
+  .num-big {
+    font-family: 'Permanent Marker', cursive;
+    font-size: clamp(3rem, 6vw, 5rem);
+    color: var(--red);
+    line-height: 1;
+    display: block;
+  }
+
+  /* Hand-drawn circle around key word */
+  .circled {
+    display: inline-block;
+    position: relative;
+  }
+  .circled::after {
+    content: '';
+    position: absolute;
+    inset: -4px -8px;
+    border: 2.5px solid var(--red);
+    border-radius: 50% 45% 55% 48% / 48% 55% 45% 52%;
+    transform: rotate(-1.5deg);
+  }
+
+  /* Stamp effect */
   .stamp {
     display: inline-block;
     border: 3px solid var(--red);
@@ -197,7 +254,45 @@
     margin-bottom: 0.8em;
   }
 
-  .quote-giant {
+  /* Arrow doodle */
+  .arrow-doodle {
+    font-size: 1.8em;
+    color: var(--red);
+    display: inline-block;
+    transform: rotate(5deg);
+    margin: 0 0.2em;
+  }
+
+  /* ============ SLIDE-SPECIFIC ============ */
+
+  /* Slide 1 — Title */
+  #s1 {
+    background: var(--ink);
+    border-color: var(--paper);
+    box-shadow: 8px 8px 0 rgba(245,240,232,0.15);
+  }
+  #s1::after { opacity: 0.05; }
+  #s1 .margin-line { background: rgba(192,57,43,0.5); }
+  #s1 h1 { color: var(--paper); font-size: clamp(3rem, 6vw, 5rem); }
+  #s1 h3 { color: rgba(245,240,232,0.5); }
+  #s1 .slide-number { color: rgba(245,240,232,0.3); }
+  #s1 p { color: rgba(245,240,232,0.75); }
+
+  #s1 .title-tag {
+    display: inline-block;
+    background: var(--red);
+    color: var(--paper);
+    font-family: 'Special Elite', cursive;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    margin-bottom: 1.2em;
+    transform: rotate(-1deg);
+  }
+
+  /* Slide 4 — Siegel */
+  #s4 .quote-giant {
     font-family: 'Permanent Marker', cursive;
     font-size: clamp(1.2rem, 2.4vw, 1.8rem);
     line-height: 1.4;
@@ -205,11 +300,17 @@
     margin: 0.5em 0 0.8em;
   }
 
+  /* ============ CONTROLS ============ */
+
   .controls {
     position: absolute;
-    bottom: 24px; left: 50%;
+    bottom: 24px;
+    left: 50%;
     transform: translateX(-50%);
-    display: flex; align-items: center; gap: 12px; z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 10;
   }
 
   .btn {
@@ -224,14 +325,18 @@
     transition: background 0.15s, transform 0.1s;
     text-transform: uppercase;
   }
-  .btn:hover  { background: var(--red); transform: translateY(-1px); }
+
+  .btn:hover { background: var(--red); transform: translateY(-1px); }
   .btn:active { transform: translateY(1px); }
   .btn:disabled { opacity: 0.3; cursor: default; }
   .btn:disabled:hover { background: var(--ink); transform: none; }
 
+  /* ============ SPEAKER NOTES ============ */
+
   .notes-panel {
     position: fixed;
-    bottom: 0; left: 50%;
+    bottom: 0;
+    left: 50%;
     transform: translateX(-50%) translateY(100%);
     width: min(92vw, 960px);
     background: #1a1008;
@@ -244,10 +349,14 @@
     line-height: 1.6;
     transition: transform 0.3s ease;
     z-index: 100;
-    max-height: 200px;
+    max-height: 180px;
     overflow-y: auto;
   }
-  .notes-panel.open { transform: translateX(-50%) translateY(0); }
+
+  .notes-panel.open {
+    transform: translateX(-50%) translateY(0);
+  }
+
   .notes-label {
     font-family: 'Special Elite', cursive;
     font-size: 0.7rem;
@@ -257,122 +366,114 @@
     margin-bottom: 6px;
     display: block;
   }
+
   .notes-hint {
     position: fixed;
-    bottom: 16px; right: 24px;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(calc(-50% + 420px));
     font-family: 'Courier Prime', monospace;
     font-size: 0.7rem;
-    color: rgba(245,240,232,0.25);
+    color: rgba(245,240,232,0.35);
     letter-spacing: 0.08em;
     z-index: 200;
   }
 
+  /* Progress bar */
   .progress {
     position: absolute;
-    bottom: 0; left: 0;
+    bottom: 0;
+    left: 0;
     height: 3px;
     background: var(--red);
     transition: width 0.3s ease;
   }
 
-  .takeaway-item {
-    display: flex;
-    gap: 1em; align-items: flex-start;
-    margin-bottom: 1.2em; padding-bottom: 1.2em;
-    border-bottom: 1px dashed rgba(100,80,60,0.3);
-  }
-  .takeaway-item:last-child { border-bottom: none; margin-bottom: 0; }
-  .ta-num {
-    font-family: 'Permanent Marker', cursive;
-    font-size: 2.2rem;
-    color: var(--red);
-    line-height: 1; flex-shrink: 0; width: 1.4em;
-  }
-  .ta-text h3 { margin-bottom: 0.2em; font-size: 0.9rem; }
-  .ta-text p  { font-size: 0.82rem; }
-
-  /* Dark title slide */
-  #s1 {
-    background: var(--ink);
-    border-color: var(--paper);
-    box-shadow: 8px 8px 0 rgba(245,240,232,0.15);
-  }
-  #s1::after { opacity: 0.05; }
-  #s1 .margin-line  { background: rgba(192,57,43,0.5); }
-  #s1 h1            { color: var(--paper); font-size: clamp(3rem, 6vw, 5rem); }
-  #s1 h3            { color: rgba(245,240,232,0.5); }
-  #s1 p             { color: rgba(245,240,232,0.75); }
-  #s1 .slide-number { color: rgba(245,240,232,0.3); }
-  #s1 .slide-job    { color: rgba(192,57,43,0.6); }
-  #s1 .placeholder  { color: rgba(192,57,43,0.5); border-left-color: rgba(192,57,43,0.4); }
-
-  .title-tag {
-    display: inline-block;
-    background: var(--red);
-    color: var(--paper);
-    font-family: 'Special Elite', cursive;
-    font-size: 0.8rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    padding: 5px 14px;
-    margin-bottom: 1.2em;
-    transform: rotate(-1deg);
+  /* Doodle SVG elements */
+  .doodle-corner {
+    position: absolute;
+    opacity: 0.15;
   }
 
-  .slide-enter { animation: slideIn 0.25s ease-out; }
+  .slide-enter {
+    animation: slideIn 0.25s ease-out;
+  }
+
   @keyframes slideIn {
     from { opacity: 0; transform: translateX(12px); }
     to   { opacity: 1; transform: translateX(0); }
   }
+
+  .takeaway-item {
+    display: flex;
+    gap: 1em;
+    align-items: flex-start;
+    margin-bottom: 1.2em;
+    padding-bottom: 1.2em;
+    border-bottom: 1px dashed rgba(100,80,60,0.3);
+  }
+  .takeaway-item:last-child { border-bottom: none; margin-bottom: 0; }
+
+  .ta-num {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 2.2rem;
+    color: var(--red);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 1.4em;
+  }
+
+  .ta-text h3 {
+    margin-bottom: 0.2em;
+    font-size: 0.9rem;
+  }
+  .ta-text p { font-size: 0.82rem; }
+
 </style>
 </head>
 <body>
 
 <div class="deck">
 
-  <!-- =============================================
-       SLIDE 1 — THE OBJECT
-       Job: Create weight before words.
-       ============================================= -->
+  <!-- SLIDE 1: TITLE -->
   <div class="slide active slide-enter" id="s1">
     <div class="margin-line"></div>
-    <div class="slide-job">Slide 1 · The Object</div>
-    <div class="title-tag">[Context / Event Name]</div>
-    <h1>[Your Talk Title]</h1>
-    <p style="margin-top:1.2em; font-size:0.9rem;" class="placeholder">
-      → Your one-line provocation goes here.<br>
-      Say it. Don't explain it. Let silence follow.
-    </p>
+    <div class="title-tag">Mental Health Awareness Week</div>
+    <h1>Sports &amp;<br>Psychology</h1>
+    <p style="margin-top:1.2em; font-size:0.9rem;">Unavoidable weight and pressure.<br>
+    Crushes most. Makes <span style="color:var(--red); font-family:'Permanent Marker',cursive;">diamonds</span> out of some.</p>
     <div style="margin-top:2em;">
-      <p style="font-size:0.78rem; opacity:0.5; font-style:italic;">[Your Name] &nbsp;·&nbsp; [Your Role]</p>
+      <p style="font-size:0.78rem; opacity:0.5; font-style:italic;">Shelton Davis &nbsp;·&nbsp; UX Researcher &amp; Designer</p>
     </div>
-    <div class="progress" style="width:14.3%"></div>
+    <div class="progress" id="progress" style="width:14.3%"></div>
     <div class="slide-number">01 / 07</div>
   </div>
 
-  <!-- =============================================
-       SLIDE 2 — THE QUESTION
-       Job: Make them realize they're already inside the subject.
-       ============================================= -->
+  <!-- SLIDE 2: THE WEIGHT -->
   <div class="slide" id="s2">
     <div class="margin-line"></div>
-    <div class="slide-job">Slide 2 · The Question</div>
-    <div class="stamp">[X] min</div>
-    <h2>The <span class="underline-red">[Object Name]</span></h2>
+    <div class="stamp">3 min</div>
+    <h2>The <span class="underline-red">Weight</span></h2>
     <div class="two-col" style="margin-top:0.8em; align-items:center;">
       <div>
-        <p class="placeholder">→ Your opening question to the room.<br>Make them realize they already have skin in the game.<br>Take 2–3 answers. Don't over-facilitate.</p>
-        <p style="margin-top:1em;" class="placeholder">
-          → 2–3 lines that connect the object to the real subject.<br>
-          Plain language. No jargon.
-        </p>
+        <p>What would you need to know about yourself before you throw this?</p>
+        <p style="margin-top:1em;">The shot put doesn't care about your mood.<br>
+        It doesn't get lighter when you're scared.<br>
+        Neither does the pressure in your life.</p>
       </div>
       <div style="text-align:center;">
-        <!-- Replace this SVG with a sketch of your object, or remove and use an image -->
-        <svg width="160" height="160" viewBox="0 0 160 160" style="display:block;margin:auto;opacity:0.4;">
-          <rect x="30" y="30" width="100" height="100" fill="none" stroke="#1a1008" stroke-width="2" stroke-dasharray="8,4"/>
-          <text x="80" y="85" text-anchor="middle" font-family="'Courier Prime',monospace" font-size="11" fill="#6b5c4a">[your object]</text>
-          <text x="80" y="100" text-anchor="middle" font-family="'Courier Prime',monospace" font-size="9" fill="#6b5c4a">sketch or image here</text>
+        <!-- Shot put doodle -->
+        <svg width="160" height="160" viewBox="0 0 160 160" style="display:block;margin:auto;">
+          <circle cx="80" cy="80" r="62" fill="none" stroke="#1a1008" stroke-width="3"/>
+          <circle cx="80" cy="80" r="62" fill="rgba(100,80,60,0.08)"/>
+          <!-- texture lines -->
+          <path d="M35 55 Q80 40 125 55" fill="none" stroke="#6b5c4a" stroke-width="1.5" opacity="0.4"/>
+          <path d="M25 80 Q80 65 135 80" fill="none" stroke="#6b5c4a" stroke-width="1.5" opacity="0.4"/>
+          <path d="M35 105 Q80 90 125 105" fill="none" stroke="#6b5c4a" stroke-width="1.5" opacity="0.4"/>
+          <!-- shadow -->
+          <ellipse cx="80" cy="152" rx="45" ry="6" fill="rgba(26,16,8,0.2)"/>
+          <text x="80" y="86" text-anchor="middle" font-family="'Permanent Marker',cursive" font-size="14" fill="#1a1008">16 lbs</text>
+          <text x="80" y="102" text-anchor="middle" font-family="'Courier Prime',monospace" font-size="10" fill="#6b5c4a">of reality</text>
         </svg>
       </div>
     </div>
@@ -380,28 +481,25 @@
     <div class="slide-number">02 / 07</div>
   </div>
 
-  <!-- =============================================
-       SLIDE 3 — WHO'S ASKING
-       Job: Establish why you're the one in the room — briefly.
-       ============================================= -->
+  <!-- SLIDE 3: WHO I AM -->
   <div class="slide" id="s3">
     <div class="margin-line"></div>
-    <div class="slide-job">Slide 3 · Who's Asking</div>
-    <div class="stamp">[X] min</div>
+    <div class="stamp">3 min</div>
     <h2>Who I Am &amp;<br>Why I'm Here</h2>
     <div class="two-col" style="margin-top:0.8em;">
       <div>
-        <p class="placeholder">→ One honest sentence about your path.<br>Not credentials. The thread that connects your work to the question on slide 2.<br>If it takes more than 30 seconds to say out loud, cut it.</p>
+        <p>I'm a UX researcher and designer. I study <span class="circled">how humans perform</span> when things get hard.</p>
+        <p style="margin-top:1em;">Not theory. Infrastructure.<br>What separates the people<br>who figure it out<br>from the ones who don't.</p>
       </div>
       <div>
         <div class="card">
           <h3>The work</h3>
-          <p class="placeholder" style="border:none; padding:0;">→ One phrase that names what you actually do.</p>
+          <p>Design thinking → human systems → preparedness for moments that matter.</p>
         </div>
-        <div style="margin-top:1.2em; font-size:0.82rem; color:var(--pencil); line-height:1.8;">
-          <span style="color:var(--red);">→</span> <span class="placeholder" style="border:none; padding:0; display:inline;">[area of work]</span><br>
-          <span style="color:var(--red);">→</span> <span class="placeholder" style="border:none; padding:0; display:inline;">[area of work]</span><br>
-          <span style="color:var(--red);">→</span> <span class="placeholder" style="border:none; padding:0; display:inline;">[area of work]</span>
+        <div style="margin-top:1.2em; font-family:'Courier Prime',monospace; font-size:0.82rem; color:var(--pencil); line-height:1.6;">
+          <span style="color:var(--red);">→</span> empathy training<br>
+          <span style="color:var(--red);">→</span> emergency preparedness<br>
+          <span style="color:var(--red);">→</span> high-stress human systems
         </div>
       </div>
     </div>
@@ -409,131 +507,118 @@
     <div class="slide-number">03 / 07</div>
   </div>
 
-  <!-- =============================================
-       SLIDE 4 — THE SCIENCE
-       Job: Borrow authority from an unexpected discipline.
-       ============================================= -->
+  <!-- SLIDE 4: SIEGEL -->
   <div class="slide" id="s4">
     <div class="margin-line"></div>
-    <div class="slide-job">Slide 4 · The Science</div>
-    <div class="stamp">[X] min</div>
-    <h3>[Source Name] · [Their Discipline]</h3>
-    <div class="quote-giant" style="color:var(--ink);">
-      <span class="placeholder" style="border:none; padding:0; font-family:'Permanent Marker',cursive; font-size:inherit; color:rgba(192,57,43,0.4);">"Your borrowed quote goes here — from outside your field, translated immediately into the room's language."</span>
-    </div>
+    <div class="stamp">6 min</div>
+    <h3>Dan Siegel · Neuroscientist</h3>
+    <div class="quote-giant">"Where attention goes,<br>neural firing occurs —<br>and where neural firing occurs,<br>neural structure <span class="underline-red">grows.</span>"</div>
     <div class="two-col" style="margin-top:0.5em;">
-      <p class="placeholder" style="font-size:0.85rem;">→ First translation sentence.<br>What does this mean in plain terms for this audience?</p>
-      <p class="placeholder" style="font-size:0.85rem;">→ Second translation sentence.<br>Show the mechanism, not just the conclusion.</p>
+      <p style="font-size:0.85rem;">Mental reps are real reps.<br>What you rehearse shapes what<br>your nervous system can do.</p>
+      <p style="font-size:0.85rem;">Visualization works.<br>Anxiety spirals work too.<br><em>Same mechanism. Different direction.</em><br>You choose — or something else chooses for you.</p>
     </div>
     <div class="progress" style="width:57.1%"></div>
     <div class="slide-number">04 / 07</div>
   </div>
 
-  <!-- =============================================
-       SLIDE 5 — THE DESIGN PRINCIPLE
-       Job: Show there's a system, not just a feeling.
-       ============================================= -->
+  <!-- SLIDE 5: SULLIVAN -->
   <div class="slide" id="s5">
     <div class="margin-line"></div>
-    <div class="slide-job">Slide 5 · The Design Principle</div>
-    <div class="stamp">[X] min</div>
-    <h3>[Source Name] · [Their Discipline]</h3>
-    <h2 class="placeholder" style="font-size:clamp(1.4rem,2.8vw,2.2rem); color:rgba(192,57,43,0.4); font-family:'Permanent Marker',cursive;">"Your second borrowed principle here — from a completely different field than slide 4."</h2>
+    <div class="stamp">5 min</div>
+    <h3>Louis Sullivan · Architect</h3>
+    <h2>"Form ever follows<br><span class="underline-red">function.</span>"</h2>
     <div class="two-col" style="margin-top:1em; align-items:start;">
       <div>
-        <p class="placeholder">→ If the function is [describe the real demand] —<br>what form does preparation need to take?</p>
+        <p>If the <em>function</em> is performing under unavoidable pressure —</p>
+        <p style="margin-top:0.8em;">what <em>form</em> does your preparation need to take?</p>
       </div>
       <div>
-        <div style="font-size:0.85rem; line-height:2.2;">
+        <!-- Arrow diagram -->
+        <div style="font-family:'Courier Prime',monospace; font-size:0.85rem; line-height:2;">
           <div style="display:flex; align-items:center; gap:8px;">
-            <span style="border:2px solid var(--ink); padding:2px 10px; font-family:'Special Elite',cursive; opacity:0.4;">[what doesn't work]</span>
+            <span style="border:2px solid var(--ink); padding:2px 10px; font-family:'Special Elite',cursive;">Generic motivation</span>
             <span style="color:var(--red); font-size:1.2em;">✗</span>
           </div>
           <div style="display:flex; align-items:center; gap:8px; margin-top:8px;">
-            <span style="border:2px solid var(--red); padding:2px 10px; font-family:'Special Elite',cursive; background:rgba(192,57,43,0.08);">[what does work]</span>
+            <span style="border:2px solid var(--red); padding:2px 10px; font-family:'Special Elite',cursive; background:rgba(192,57,43,0.08);">Built for your pressure</span>
             <span style="color:var(--red); font-size:1.2em;">✓</span>
           </div>
         </div>
-        <p style="margin-top:1em; font-size:0.8rem; color:var(--pencil);" class="placeholder">→ One sentence consequence. Why does this matter right now?</p>
+        <p style="margin-top:1em; font-size:0.8rem; color:var(--pencil);">You can't give what you haven't built.<br>ME skills before WE skills.</p>
       </div>
     </div>
     <div class="progress" style="width:71.4%"></div>
     <div class="slide-number">05 / 07</div>
   </div>
 
-  <!-- =============================================
-       SLIDE 6 — THE BODY
-       Job: Make the abstract felt. Highest risk, highest reward.
-       Budget 7–10 minutes. Do not skip this slide.
-       ============================================= -->
+  <!-- SLIDE 6: THE GLOVE -->
   <div class="slide" id="s6">
     <div class="margin-line"></div>
-    <div class="slide-job">Slide 6 · The Body</div>
-    <div class="stamp">[X] min</div>
-    <h2>The <span class="underline-red">[Demo Name]</span></h2>
+    <div class="stamp">7 min</div>
+    <h2>The <span class="underline-red">Glove</span></h2>
     <div class="two-col" style="margin-top:0.8em; align-items:center;">
       <div>
-        <p class="placeholder">→ One sentence naming what the audience is about to experience or witness.</p>
-        <p style="margin-top:0.8em;" class="placeholder">
-          → What changes when pressure is applied?<br>
-          Name it plainly — physical, cognitive, relational.
-        </p>
-        <p style="margin-top:0.8em; font-size:1rem; font-weight:600;" class="placeholder">→ The reframe: this isn't a flaw.<br>It's a known condition with a known response.</p>
-        <p style="margin-top:0.8em; font-size:0.85rem;" class="placeholder">→ And you can <span class="underline-red">[name the trainable thing].</span></p>
+        <p>Pressure degrades your ability to receive accurate information.</p>
+        <p style="margin-top:0.8em;">From your body.<br>From your teammate.<br>From the situation.</p>
+        <p style="margin-top:0.8em; font-family:'Special Elite',cursive; font-size:1rem; color:var(--ink);">That's not weakness.<br>That's physiology.</p>
+        <p style="margin-top:0.8em; font-size:0.85rem;">And you can <span class="underline-red">train around it.</span></p>
       </div>
-      <div style="text-align:center;">
-        <!-- Replace with sketch or image of your prop/demo -->
-        <svg width="150" height="150" viewBox="0 0 150 150" style="display:block;margin:auto;opacity:0.35;">
-          <rect x="25" y="25" width="100" height="100" fill="none" stroke="#1a1008" stroke-width="2" stroke-dasharray="8,4"/>
-          <text x="75" y="78" text-anchor="middle" font-family="'Courier Prime',monospace" font-size="11" fill="#6b5c4a">[your prop]</text>
-          <text x="75" y="94" text-anchor="middle" font-family="'Courier Prime',monospace" font-size="9" fill="#6b5c4a">sketch or image here</text>
+      <div>
+        <!-- Glove doodle -->
+        <svg width="150" height="170" viewBox="0 0 150 170" style="display:block;margin:auto;">
+          <!-- Hand/glove shape -->
+          <path d="M45 140 L35 80 Q33 65 42 60 Q50 56 55 65 L57 75 L57 45 Q57 32 65 30 Q73 28 74 40 L74 68 L74 40 Q75 28 83 28 Q91 27 92 40 L92 65 L92 45 Q92 33 100 32 Q108 31 109 43 L109 68 L110 60 Q111 50 118 50 Q126 51 126 62 L122 100 L118 130 L115 140 Z" fill="rgba(100,80,60,0.15)" stroke="#1a1008" stroke-width="2.5" stroke-linejoin="round"/>
+          <!-- knuckle lines -->
+          <line x1="58" y1="76" x2="72" y2="74" stroke="#6b5c4a" stroke-width="1.5" opacity="0.5"/>
+          <line x1="75" y1="74" x2="90" y2="73" stroke="#6b5c4a" stroke-width="1.5" opacity="0.5"/>
+          <line x1="93" y1="72" x2="107" y2="72" stroke="#6b5c4a" stroke-width="1.5" opacity="0.5"/>
+          <!-- arthritis bumps -->
+          <circle cx="65" cy="60" r="4" fill="rgba(192,57,43,0.3)" stroke="#c0392b" stroke-width="1"/>
+          <circle cx="83" cy="58" r="4" fill="rgba(192,57,43,0.3)" stroke="#c0392b" stroke-width="1"/>
+          <circle cx="100" cy="58" r="4" fill="rgba(192,57,43,0.3)" stroke="#c0392b" stroke-width="1"/>
+          <text x="75" y="163" text-anchor="middle" font-family="'Courier Prime',monospace" font-size="9" fill="#6b5c4a">arthritis sim glove</text>
         </svg>
-        <p style="text-align:center; font-size:0.78rem; color:var(--pencil); font-style:italic; margin-top:6px;" class="placeholder">→ volunteer needed / [instruction]</p>
+        <p style="text-align:center; font-size:0.78rem; color:var(--pencil); font-style:italic; margin-top:4px;">volunteer needed</p>
       </div>
     </div>
     <div class="progress" style="width:85.7%"></div>
     <div class="slide-number">06 / 07</div>
   </div>
 
-  <!-- =============================================
-       SLIDE 7 — THE LEAVE-BEHIND
-       Job: Three things. One unanswered question. No bow.
-       Do NOT close with a summary or thank-you.
-       ============================================= -->
+  <!-- SLIDE 7: TAKEAWAYS + CLOSE -->
   <div class="slide" id="s7">
     <div class="margin-line"></div>
-    <div class="slide-job">Slide 7 · The Leave-Behind</div>
-    <div class="stamp">[X] min</div>
+    <div class="stamp">6 min</div>
     <h2>Three Things<br>to <span class="underline-red">Keep</span></h2>
     <div style="margin-top:0.8em;">
       <div class="takeaway-item">
         <div class="ta-num">1</div>
         <div class="ta-text">
-          <h3 class="placeholder">[Takeaway headline — connects back to slide 4]</h3>
-          <p class="placeholder">One sentence that lands the implication.</p>
+          <h3>You train what you ARE, not just what you do</h3>
+          <p>Attention is athletic. Where it goes, structure grows.</p>
         </div>
       </div>
       <div class="takeaway-item">
         <div class="ta-num">2</div>
         <div class="ta-text">
-          <h3 class="placeholder">[Takeaway headline — connects back to slide 5]</h3>
-          <p class="placeholder">One sentence that lands the implication.</p>
+          <h3>Prep has to fit the actual pressure</h3>
+          <p>Form follows function. Generic motivation won't hold.</p>
         </div>
       </div>
       <div class="takeaway-item">
         <div class="ta-num">3</div>
         <div class="ta-text">
-          <h3 class="placeholder">[Takeaway headline — connects back to slide 6]</h3>
-          <p class="placeholder">One sentence that lands the implication.</p>
+          <h3>Slowing down is a competitive skill</h3>
+          <p>Receiving accurate information under load is trainable. Not optional.</p>
         </div>
       </div>
     </div>
-    <p style="margin-top:0.6em; font-family:'Special Elite',cursive; font-size:0.9rem; color:var(--red); font-style:italic;" class="placeholder">→ Your closing question here. Make it unanswerable in the room. Then stop.</p>
+    <p style="margin-top:0.6em; font-family:'Special Elite',cursive; font-size:0.9rem; color:var(--red); font-style:italic;">What's one thing the pressure in your life is trying to teach you that you keep avoiding?</p>
     <div class="progress" style="width:100%"></div>
     <div class="slide-number">07 / 07</div>
   </div>
 
-  <!-- NAV -->
+  <!-- NAV CONTROLS -->
   <div class="controls">
     <button class="btn" id="prevBtn" onclick="navigate(-1)" disabled>← Prev</button>
     <button class="btn" id="nextBtn" onclick="navigate(1)">Next →</button>
@@ -541,52 +626,35 @@
 
 </div>
 
-<!-- SPEAKER NOTES -->
+<!-- SPEAKER NOTES PANEL -->
 <div class="notes-panel" id="notesPanel">
   <span class="notes-label">Speaker Notes</span>
   <div id="notesText"></div>
 </div>
 
-<div class="notes-hint">[ N ] notes</div>
+<div class="notes-hint" id="notesHint">[ N ] notes</div>
 
 <script>
-  const slides     = document.querySelectorAll('.slide');
+  const slides = document.querySelectorAll('.slide');
   const notesPanel = document.getElementById('notesPanel');
-  const notesText  = document.getElementById('notesText');
-  let current   = 0;
+  const notesText = document.getElementById('notesText');
+  let current = 0;
   let notesOpen = false;
 
-  // ── INSTRUCTIONS: Replace each note below with your own speaker cues.
-  //    The current text tells you what kind of content belongs on each slide.
-  //    Delete the instructions once you've filled in your own notes.
   const notes = [
-    `SLIDE 1 — THE OBJECT
-Walk in with your object. Don't explain it. Say your one provocation line and let silence sit. Your name is on the slide — let them read it, don't announce yourself. The object is doing the work right now.
-→ Replace this note with: what you say word-for-word, what you do with the object, how long you hold silence.`,
+    `Walk in holding the shot put. Don't explain it. Say the line: "Unavoidable weight and pressure — crushes most, makes diamonds out of some." Let silence sit. Then ask: what would you need to know about yourself before you threw this? Take 2-3 answers. You're already inside the work.`,
 
-    `SLIDE 2 — THE QUESTION
-Ask your opening question to the room. Take 2–3 answers — receive them, don't evaluate them. Then deliver 2–3 lines connecting the object to the real subject. This is not a transition. This IS the work beginning.
-→ Replace this note with: your exact question, the 2–3 lines you'll say, how you handle unexpected answers.`,
+    `Hold the shot put while you talk. The weight is doing work for you. One honest sentence about your path — not a resume read. "I study how humans perform when things get hard." That's it. Let curiosity do the rest.`,
 
-    `SLIDE 3 — WHO'S ASKING
-One honest sentence. Your through-line. Credentials only if they directly serve the question. The card on the right is for a simple summary of your work — not your bio.
-→ Replace this note with: your one sentence, the three work areas you'll name, any personal context that earns credibility here without over-leading.`,
+    `Same sentence from the last slide — this just makes it structural. The through-line from design thinking to human systems. You don't need to name the Empathy Decathlon. The logic is: I build preparedness infrastructure, not motivation posters.`,
 
-    `SLIDE 4 — THE SCIENCE
-Introduce your source — their field first, then the quote. Read the quote slowly. Then translate it immediately into plain language your audience can use. The gap between the source's world and this room is where the insight lives.
-→ Replace this note with: who the source is, the quote verbatim, your two translation sentences, any pushback you anticipate and how you'll handle it.`,
+    `Write the quote on a board if possible, or read it slowly. Translate it: mental reps are real reps. Visualization works because the brain treats rehearsed images as real events. Anxiety spirals work the same way — same circuitry, different direction. This is not soft. This is neuroscience applied to training.`,
 
-    `SLIDE 5 — THE DESIGN PRINCIPLE
-Introduce your second source — from a completely different field than slide 4. Apply the principle to your context using the contrast diagram. One sentence consequence. Keep it brief — this slide earns its place by making the audience feel the insight is inevitable, not invented.
-→ Replace this note with: who the source is, the principle, your before/after contrast, the one-sentence consequence.`,
+    `Sullivan was an architect. His point: the shape of something should come from what it needs to DO. Ask them: if the function is performing under pressure that won't go away — what does your preparation actually need to look like? This is where generic "believe in yourself" advice falls apart. Prep has to be specific.`,
 
-    `SLIDE 6 — THE BODY
-This is your highest-risk, highest-reward slide. Budget more time than you think you need — 7 to 10 minutes. Ask for a volunteer. Give them a simple task with the prop. Let the room watch. Ask one question afterward: what changed? The debrief is the slide.
-→ Replace this note with: your exact volunteer ask, the task, the question you'll pose to the room, the key point you'll land from the debrief.`,
+    `Ask for a volunteer. Have them put on the glove and write their name, or pick up a pen. Let the room watch. Ask: what changed? What did you have to slow down to feel? The point: under pressure, your accuracy degrades. You stop receiving clean information. The athletes who last are the ones who train that receiving capacity — not just the output.`,
 
-    `SLIDE 7 — THE LEAVE-BEHIND
-Read the three takeaways slowly. Don't explain them — you've already done that work. Then say your closing question and stop. Do not summarize. Do not thank them. Do not invite applause. The open question IS the ending. Let them carry it out.
-→ Replace this note with: your three takeaways word-for-word, your closing question, a reminder to stop talking after you say it.`
+    `Read these three slowly. Don't over-explain. Then land the closing question — and stop. Don't wrap it up. Don't give them the answer. The discomfort of the question sitting unanswered is the point. That's the neural firing happening in real time. Let them leave with it.`
   ];
 
   function navigate(dir) {
@@ -603,8 +671,10 @@ Read the three takeaways slowly. Don't explain them — you've already done that
     notesPanel.classList.toggle('open', notesOpen);
   }
 
+  // Init notes
   notesText.textContent = notes[0];
 
+  // Keyboard
   document.addEventListener('keydown', e => {
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown') navigate(1);
     if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   navigate(-1);
